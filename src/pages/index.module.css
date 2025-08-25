@@ -8,6 +8,7 @@
     text-align: right;
     position: relative;
     overflow: hidden;
+    --ifm-hero-text-color: #fff
 }
 
 @media screen and (max-width: 996px) {

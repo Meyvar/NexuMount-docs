@@ -41,7 +41,7 @@ const config = {
                 docs: {
                     sidebarPath: './sidebars.js',
                     editUrl:
-                        'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+                        'https://github.com/Meyvar/NexuMount-docs/edit/main/',
                 },
                 theme: {
                     customCss: './src/css/custom.css',
@@ -62,8 +62,8 @@ const config = {
                 },
                 items: [
                     {
-                        to: '/docs/intro',
-                        label: '使用文档',
+                        to: '/docs/guide',
+                        label: '使用指南',
                         position: 'left',
                     },
                     {
@@ -80,8 +80,8 @@ const config = {
                         title: '文档',
                         items: [
                             {
-                                label: '使用文档',
-                                to: '/docs/intro',
+                                label: '使用指南',
+                                to: '/docs/guide',
                             },
                         ],
                     },
