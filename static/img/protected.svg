@@ -1,5 +1,6 @@
 <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
     <rect width="120" height="120" rx="16" fill="var(--tile)" />
-    <circle cx="60" cy="60" r="24" stroke="var(--acc1)" stroke-width="4" fill="none"/>
-    <path d="M48 60 V50 A12 12 0 0 1 72 50 V60" stroke="var(--acc2)" stroke-width="4" fill="none"/>
+    <circle cx="60" cy="50" r="14" stroke="var(--acc1)" stroke-width="4" fill="none"/>
+    <rect x="44" y="64" width="32" height="20" rx="4" stroke="var(--acc2)" stroke-width="4" fill="none"/>
+    <line x1="60" y1="72" x2="60" y2="78" stroke="var(--acc2)" stroke-width="4"/>
 </svg>

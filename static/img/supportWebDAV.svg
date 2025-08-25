@@ -1,5 +1,5 @@
 <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
     <rect width="120" height="120" rx="16" fill="var(--tile)" />
-    <path d="M40 50 H80 V80 H40 Z" stroke="var(--acc1)" stroke-width="4" fill="none"/>
-    <path d="M50 50 V40 H70 V50" stroke="var(--acc2)" stroke-width="4" fill="none"/>
+    <path d="M36 44h48l-8 12h-32z" stroke="var(--acc1)" stroke-width="4" fill="none"/>
+    <rect x="40" y="60" width="40" height="24" rx="4" stroke="var(--acc2)" stroke-width="4" fill="none"/>
 </svg>
