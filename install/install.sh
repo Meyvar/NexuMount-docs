@@ -106,15 +106,14 @@ status(){
 }
 
 start(){
-    pid=$(pgrep -f "$JAR_NAME")
-    if [ -z "$pid" ]; then
-        echo "正在启动项目..."
-        # 后台启动，不输出日志
+    pid=`ps -ef|grep $JAR_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+    if [ -z "${pid}" ];then
+        echo "正在启动......"
         nohup java -jar -XX:MetaspaceSize=6144m -XX:MaxMetaspaceSize=12288m "$JAR_NAME" >/dev/null 2>&1 &
-        echo "启动完成"
     else
-        echo "项目已在运行中，PID: $pid"
+        echo "项目运行中或端口已被占用"
     fi
+
 }
 
 
