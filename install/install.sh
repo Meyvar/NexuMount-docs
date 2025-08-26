@@ -32,6 +32,10 @@ JDK_URL="${JDK_BASE_URL}/${JDK_TAR}"
 
 # 询问安装路径
 read -p "请输入安装路径（例如 /opt/myapp）: " INSTALL_DIR
+if [ -z "$INSTALL_DIR" ]; then
+    echo "安装路径不能为空！"
+    exit 1
+fi
 
 # 创建安装目录
 mkdir -p "$INSTALL_DIR" || { echo "无法创建目录 $INSTALL_DIR"; exit 1; }
@@ -55,11 +59,7 @@ curl -L -o "/tmp/$JDK_TAR" "$JDK_URL" || { echo "JDK 下载失败"; exit 1; }
 
 echo "正在解压 JDK 到 $INSTALL_DIR/java ..."
 mkdir -p "$INSTALL_DIR/java"
-tar -xzf "/tmp/$JDK_TAR" -C "$INSTALL_DIR/java" || { echo "JDK 解压失败"; exit 1; }
-
-# 获取 JDK 目录名
-JDK_FOLDER=$(tar -tf "/tmp/$JDK_TAR" | head -1 | cut -f1 -d"/")
-echo "JDK 安装完成：$INSTALL_DIR/java/$JDK_FOLDER"
+tar -xzf "/tmp/$JDK_TAR" -C "$INSTALL_DIR/java" --strip-components=1 || { echo "JDK 解压失败"; exit 1; }
 
 # 安装程序主体 (zip)
 APP_ZIP=$(basename "$APP_URL")
@@ -69,6 +69,88 @@ curl -L -o "/tmp/$APP_ZIP" "$APP_URL" || { echo "程序主体下载失败"; exit
 echo "正在解压程序主体到 $INSTALL_DIR ..."
 unzip -o "/tmp/$APP_ZIP" -d "$INSTALL_DIR" || { echo "程序主体解压失败"; exit 1; }
 
+# 生成启动脚本 run.sh
+RUN_SCRIPT="$INSTALL_DIR/run.sh"
+cat > "$RUN_SCRIPT" <<EOF
+#!/bin/sh
+
+# 使用安装脚本时用户输入的路径
+INSTALL_DIR="$INSTALL_DIR"
+
+JAVA_HOME="\$INSTALL_DIR/java"
+PATH="\$JAVA_HOME/bin:\$PATH"
+
+JAR_NAME="\$INSTALL_DIR/NexuMount.jar"
+
+tips(){
+    echo "-------------------------------------"
+    echo ""
+    echo "项目地址：\${JAR_NAME}"
+    echo ""
+    echo "你可以使用如下参数进行操作"
+    echo "-status   - 查看当前项目运行状态"
+    echo "-start    - 启动当前项目"
+    echo "-stop     - 停止当前项目"
+    echo "-restart  - 重启当前项目"
+    echo ""
+    echo "-------------------------------------"
+}
+
+status(){
+    pid=\$(pgrep -f "\$JAR_NAME")
+    if [ -z "\$pid" ]; then
+        echo "没有项目在运行"
+    else
+        echo "项目正在运行中，PID: \$pid"
+    fi
+}
+
+start(){
+    pid=$(pgrep -f "$JAR_NAME")
+    if [ -z "$pid" ]; then
+        echo "正在启动项目..."
+        # 后台启动，不输出日志
+        nohup java -jar -XX:MetaspaceSize=6144m -XX:MaxMetaspaceSize=12288m "$JAR_NAME" >/dev/null 2>&1 &
+        echo "启动完成"
+    else
+        echo "项目已在运行中，PID: $pid"
+    fi
+}
+
+
+stop(){
+    pid=\$(pgrep -f "\$JAR_NAME")
+    if [ -z "\$pid" ]; then
+        echo "没有项目在运行，请先启动"
+    else
+        kill -9 \$pid
+        echo "已停止应用，PID: \$pid"
+    fi
+}
+
+restart(){
+    pid=\$(pgrep -f "\$JAR_NAME")
+    if [ -n "\$pid" ]; then
+        echo "正在停止应用，PID: \$pid ..."
+        kill -9 \$pid
+        sleep 2
+    fi
+    start
+    echo "项目重启完成！"
+}
+
+case "\$1" in
+    "status") status ;;
+    "start") start ;;
+    "stop") stop ;;
+    "restart") restart ;;
+    *) tips ;;
+esac
+EOF
+
+chmod +x "$RUN_SCRIPT"
+echo "启动脚本已生成：$RUN_SCRIPT"
+
 echo "安装完成！"
-echo "JDK 路径：$INSTALL_DIR/java/$JDK_FOLDER"
+echo "JDK 路径：$INSTALL_DIR/java/"
 echo "程序安装路径：$INSTALL_DIR"
