@@ -71,80 +71,14 @@ unzip -o "/tmp/$APP_ZIP" -d "$INSTALL_DIR" || { echo "程序主体解压失败";
 
 # 生成启动脚本 run.sh
 RUN_SCRIPT="$INSTALL_DIR/run.sh"
-cat > "$RUN_SCRIPT" <<EOF
-#!/bin/sh
-
-# 使用安装脚本时用户输入的路径
-
-JAVA_HOME="$INSTALL_DIR/java"
-PATH="\$JAVA_HOME/bin:\$PATH"
-
-JAR_NAME="$INSTALL_DIR/NexuMount.jar"
-
-tips(){
-    echo "-------------------------------------"
-    echo ""
-    echo "项目地址：\${JAR_NAME}"
-    echo ""
-    echo "你可以使用如下参数进行操作"
-    echo "-status   - 查看当前项目运行状态"
-    echo "-start    - 启动当前项目"
-    echo "-stop     - 停止当前项目"
-    echo "-restart  - 重启当前项目"
-    echo ""
-    echo "-------------------------------------"
-}
-
-status(){
-    pid=\$(pgrep -f "\$JAR_NAME")
-    if [ -z "\$pid" ]; then
-        echo "没有项目在运行"
-    else
-        echo "项目正在运行中，PID: \$pid"
-    fi
-}
-
-start(){
-    pid=\`ps -ef|grep $JAR_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
-    if [ -z "${pid}" ];then
-        echo "正在启动......"
-        nohup java -jar -XX:MetaspaceSize=6144m -XX:MaxMetaspaceSize=12288m "\$JAR_NAME" >/dev/null 2>&1 &
-    else
-        echo "项目运行中或端口已被占用"
-    fi
-
-}
 
 
-stop(){
-    pid=\$(pgrep -f "\$JAR_NAME")
-    if [ -z "\$pid" ]; then
-        echo "没有项目在运行，请先启动"
-    else
-        kill -9 \$pid
-        echo "已停止应用，PID: \$pid"
-    fi
-}
-
-restart(){
-    pid=\$(pgrep -f "\$JAR_NAME")
-    if [ -n "\$pid" ]; then
-        echo "正在停止应用，PID: \$pid ..."
-        kill -9 \$pid
-        sleep 2
-    fi
-    start
-    echo "项目重启完成！"
-}
-
-case "\$1" in
-    "status") status ;;
-    "start") start ;;
-    "stop") stop ;;
-    "restart") restart ;;
-    *) tips ;;
-esac
-EOF
+# 替换文件中的 INSTALL_DIR
+if [ -f "$RUN_SCRIPT" ]; then
+    sed -i "s|^INSTALL_DIR=.*|INSTALL_DIR=\"$NEW_INSTALL_DIR\"|" "$RUN_SCRIPT"
+else
+    echo "run.sh 文件不存在。"
+fi
 
 chmod +x "$RUN_SCRIPT"
 echo "启动脚本已生成：$RUN_SCRIPT"
