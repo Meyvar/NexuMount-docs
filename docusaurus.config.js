@@ -67,6 +67,11 @@ const config = {
                         position: 'left',
                     },
                     {
+                        to: '/docs/config',
+                        label: '配置',
+                        position: 'left',
+                    },
+                    {
                         href: 'https://github.com/facebook/docusaurus',
                         label: 'GitHub',
                         position: 'right',
