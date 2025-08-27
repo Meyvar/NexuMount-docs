@@ -75,11 +75,7 @@ RUN_SCRIPT="$INSTALL_DIR/run.sh"
 
 # 替换文件中的 INSTALL_DIR
 if [ -f "$RUN_SCRIPT" ]; then
-    # 替换 JAVA_HOME
-    sed -i "s|^export JAVA_HOME=.*|export JAVA_HOME=\"$INSTALL_DIR/java\"|" "$RUN_SCRIPT"
-
-    # 替换 JAR_NAME
-    sed -i "s|^JAR_NAME=.*|JAR_NAME=\"$INSTALL_DIR/NexuMount.jar\"|" "$RUN_SCRIPT"
+    sed -i "s|^INSTALL_DIR=.*|INSTALL_DIR="$INSTALL_DIR"|" "$RUN_SCRIPT"
 else
     echo "run.sh 文件不存在。"
 fi
