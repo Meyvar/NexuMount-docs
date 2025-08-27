@@ -5,7 +5,7 @@ displayed_sidebar: guideSidebar
 sidebar_position: 5
 ---
 
-## accessToken
+## 获取accessToken
 
 ---
 百度网盘授权token
@@ -23,6 +23,12 @@ sidebar_position: 5
 5、从当前页面地址中获取
 
 ![baidu-token-1.png](img/baidu-token-1.png)
+
+
+import Modal  from '@site/src/components/Modal';
+
+<Modal text="打开弹框" title="获取token" iframeUrl="/NexuMount-docs/html/views/drivers/baidu/getToken.html" width="900px" height="600px" />
+
 
 ## 源路径
 
