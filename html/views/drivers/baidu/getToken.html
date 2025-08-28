@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>百度网盘获取accessToken</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+</head>
+<body>
+<form class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">授权码</label>
+        <div class="layui-input-block">
+            <input type="text" name="code" required placeholder="点击按钮获取授权码" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button type="button" class="layui-btn" action="getCode" style="width: 100%;">① 获取授权码</button>
+    </div>
+    <div class="layui-form-item">
+        <button type="button" class="layui-btn" action="getAccessToken" style="width: 100%;">② 获取accessToken</button>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">access_token</label>
+        <div class="layui-input-block">
+            <textarea name="access_token" disabled class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">refresh_token</label>
+        <div class="layui-input-block">
+            <textarea name="refresh_token" disabled class="layui-textarea"></textarea>
+        </div>
+    </div>
+</form>
+
+
+
+<script src="../../../lib/jquery-3.7.1.min.js"></script>
+<script src="../../../layui/layui.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
