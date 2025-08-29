@@ -1,4 +1,5 @@
 let baiduToken = {
+    vm: this,
     layer: null,
     init() {
         layui.use(['layer', 'form'], function () {
@@ -15,9 +16,12 @@ let baiduToken = {
             "width=800,height=600,top=100,left=100"
         );
     },
+    encodeBase64(str) {
+        return btoa(unescape(encodeURIComponent(str)));
+    },
     getAccessToken() {
         let code = $('[name="code"]').val()
-        let url = "https://laoliuhe.qzz.io/?driverType=baidu&action=getToken&code=" + code
+        let url = "https://nexu-mount-api.laoliuhe.qzz.io/?driverType=baidu&action=getToken&code=" + code
 
         var index = layer.load(3);
 
@@ -34,8 +38,10 @@ let baiduToken = {
                     if (data.error) {
                         layer.alert(data.error_description, {icon: 2});
                     } else {
-                        $('[name="access_token"]').val(data.access_token)
-                        $('[name="refresh_token"]').val(data.refresh_token)
+                        let access_token = baiduToken.encodeBase64(data.access_token + "|" + new Date().getTime() + (data.expires_in * 1000))
+                        let refresh_token = baiduToken.encodeBase64(data.refresh_token)
+                        $('[name="access_token"]').val(access_token)
+                        $('[name="refresh_token"]').val(refresh_token)
                     }
 
                 } else {
