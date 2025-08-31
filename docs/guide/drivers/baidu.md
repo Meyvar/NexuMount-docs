@@ -8,27 +8,35 @@ sidebar_position: 5
 ## 获取accessToken
 
 ---
+
+
+import Modal  from '@site/src/components/Modal';
+
+<Modal text="点击获取" title="获取token" iframeUrl="/NexuMount-docs/html/views/drivers/baidu/getToken.html" width="900px" height="600px" />
+
+
 百度网盘授权token
 
 1、确保当前当前浏览器已登录百度网盘。
 
 2、当前浏览器未安装网盘助手类油猴插件。
 
-3、通过第三方获取 [点击授权Token](https://openapi.baidu.com/oauth/2.0/authorize?client_id=IlLqBbU3GjQ0t46TRwFateTprHWl39zF&response_type=token&redirect_uri=oob&confirm_login=0&scope=basic,netdisk)。
+3、获取授权码
 
-4、页面会自动跳转到如下页面
+- 点击获取授权码
+- 弹框中登录百度账号并授权
 
-![img.png](img/baidu-token.png)
+![img.png](img/c11df50c-bae2-43e8-8fcb-910320f7adad.png)
 
-5、从当前页面地址中获取
+- 复制授权到到文本框内
 
-![baidu-token-1.png](img/baidu-token-1.png)
+![e3beb6d8-bc28-40b5-ab6e-fee036d629f8.png](img/e3beb6d8-bc28-40b5-ab6e-fee036d629f8.png)
 
+- 点击获取获取accessToken
 
-import Modal  from '@site/src/components/Modal';
+4、设置 access_token 和 refresh_token
 
-<Modal text="打开弹框" title="获取token" iframeUrl="/NexuMount-docs/html/views/drivers/baidu/getToken.html" width="900px" height="600px" />
-
+![7950fbec-9d93-46c9-b763-4eb17defe0ce.png](img/7950fbec-9d93-46c9-b763-4eb17defe0ce.png)
 
 ## 源路径
 

@@ -2,22 +2,20 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>百度网盘获取accessToken</title>
+    <title>阿里云盘获取accessToken</title>
     <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <style>
+        .qrCode{
+            display: flex;
+            justify-content: center;
+            height: 250px;
+        }
+    </style>
 </head>
 <body>
 <form class="layui-form">
-    <div class="layui-form-item">
-        <label class="layui-form-label">授权码</label>
-        <div class="layui-input-block">
-            <input type="text" name="code" required placeholder="点击按钮获取授权码" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <button type="button" class="layui-btn" action="getCode" style="width: 100%;">① 获取授权码</button>
-    </div>
-    <div class="layui-form-item">
-        <button type="button" class="layui-btn" action="getAccessToken" style="width: 100%;">② 获取accessToken</button>
+    <div class="qrCode">
+        <img id="qrCode" src="https://openapi.alipan.com/oauth/qrcode/175643776518460caefb424dc88e090d09f9a20fa9">
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">access_token</label>
