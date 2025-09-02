@@ -7,11 +7,14 @@ let aliyun = {
         aliyun.getQRCode()
     },
     getQRCode() {
+        var index = layer.load(3);
         $.ajax({
             url: "https://nexu-mount-api.laoliuhe.qzz.io/?driverType=aliyun&action=getQRCode",
             type: "get",
             contentType: "application/json; charset=utf-8",
             success(resp) {
+                layer.close(index)
+
                 if (resp.code !== 200) {
                     layer.alert(resp.msg, {icon: 2});
                     return

@@ -9,13 +9,7 @@ sidebar_position: 5
 
 ---
 
-
-import Modal  from '@site/src/components/Modal';
-
-<Modal text="点击获取" title="获取token" iframeUrl="/NexuMount-docs/html/views/drivers/baidu/getToken.html" width="900px" height="600px" />
-
-
-百度网盘授权token
+### 百度网盘授权token
 
 1、确保当前当前浏览器已登录百度网盘。
 
@@ -25,6 +19,11 @@ import Modal  from '@site/src/components/Modal';
 
 - 点击获取授权码
 - 弹框中登录百度账号并授权
+
+import Modal  from '@site/src/components/Modal';
+
+<Modal text="点击获取" title="获取token" iframeUrl="/NexuMount-docs/html/views/drivers/baidu/getToken.html" width="900px" height="600px" />
+
 
 ![img.png](img/c11df50c-bae2-43e8-8fcb-910320f7adad.png)
 
