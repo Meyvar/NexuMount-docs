@@ -17,7 +17,7 @@ import Modal  from '@site/src/components/Modal';
 
 <Modal text="点击获取" title="扫码授权获取token" iframeUrl="/NexuMount-docs/html/views/drivers/aliyun/getToken.html" width="480px" height="600px" />
 
-<p style={{color:'red'}}>访问托管在Cloudflare，国内用户可能加载较慢！</p>
+<p style={{color:'red'}}>服务托管在Cloudflare，国内用户可能加载较慢！</p>
 
 2、使用阿里网盘扫码获取token
 
