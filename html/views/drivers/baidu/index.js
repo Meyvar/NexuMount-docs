@@ -1,5 +1,4 @@
 let baiduToken = {
-    vm: this,
     layer: null,
     init() {
         layui.use(['layer', 'form'], function () {
