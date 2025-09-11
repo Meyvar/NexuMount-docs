@@ -28,8 +28,9 @@ displayed_sidebar: guideSidebar
     - [ ] [天翼云盘](https://cloud.189.cn) (个人云, 家庭云)
     - [ ] [123云盘](https://www.123pan.com/)
     - [x] WebDav
+    - [x] FTP(S)/SFTP
     - [x] [百度网盘](http://pan.baidu.com/)
-    - [ ] [夸克网盘](https://pan.quark.cn)
+    - [x] [夸克网盘](https://pan.quark.cn)
     - [ ] [迅雷网盘](https://pan.xunlei.com)
     - [ ] [蓝奏云](https://www.lanzou.com/)
     - [ ] [115](https://115.com/)
