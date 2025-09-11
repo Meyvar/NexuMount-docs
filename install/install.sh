@@ -9,7 +9,7 @@
 
 # 设置 JDK 基础下载地址
 JDK_BASE_URL="https://download.oracle.com/java/21/latest"
-APP_URL="https://meyvar.github.io/NexuMount-docs/install/app.zip"  # <-- 修改成你的程序下载地址
+APP_URL="http://192.168.0.105:4000/app.zip"  # <-- 修改成你的程序下载地址
 
 # 检测系统架构
 ARCH=$(uname -m)
